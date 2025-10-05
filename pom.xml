@@ -31,6 +31,10 @@
 
         <!--  Test Deps  -->
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+
+        <!--  Artifactory  -->
+        <cleanservice-artifactory-url>${env.ARTIFACTORY_URL}</cleanservice-artifactory-url>
+        <snapshot-repo>${env.SNAPSHOT_REPO}</snapshot-repo>
     </properties>
 
     <dependencyManagement>
@@ -132,23 +136,12 @@
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>deploy-env-vars</id>
-
-            <properties>
-                <cleanservice-artifactory-url>${env.ARTIFACTORY_URL}</cleanservice-artifactory-url>
-                <snapshot-repo>${env.SNAPSHOT_REPO}</snapshot-repo>
-            </properties>
-
-            <distributionManagement>
-                <snapshotRepository>
-                    <id>cleanservice-snapshot</id>
-                    <name>cleanservice-snapshot</name>
-                    <url>${cleanservice-artifactory-url}${snapshot-repo}</url>
-                </snapshotRepository>
-            </distributionManagement>
-        </profile>
-    </profiles>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>cleanservice-snapshot</id>
+            <name>cleanservice-snapshot</name>
+            <url>${artifactory.url}${snapshot.repo}}</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>
