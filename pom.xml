@@ -140,7 +140,7 @@
         <snapshotRepository>
             <id>cleanservice-snapshot</id>
             <name>cleanservice-snapshot</name>
-            <url>${artifactory.url}${snapshot.repo}}</url>
+            <url>${artifactory.url}${snapshot.repo}</url>
         </snapshotRepository>
     </distributionManagement>
 
