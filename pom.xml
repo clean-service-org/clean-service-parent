@@ -137,6 +137,11 @@
     </build>
 
     <distributionManagement>
+        <repository>
+            <id>cleanservice-snapshot</id>
+            <name>cleanservice-snapshot</name>
+            <url>${artifactory.url}${release.repo}</url>
+        </repository>
         <snapshotRepository>
             <id>cleanservice-snapshot</id>
             <name>cleanservice-snapshot</name>
