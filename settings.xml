@@ -2,9 +2,27 @@
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
     <servers>
         <server>
+            <id>cleanservice-release</id>
+            <username>${env.ARTIFACTORY_USER}</username>
+            <password>${env.ARTIFACTORY_PASSWORD}</password>
+        </server>
+        <server>
             <id>cleanservice-snapshot</id>
-            <username>${ARTIFACTORY_USERNAME}</username>
-            <password>${ARTIFACTORY_PASSWORD}</password>
+            <username>${env.ARTIFACTORY_USERNAME}</username>
+            <password>${env.ARTIFACTORY_PASSWORD}</password>
         </server>
     </servers>
+    <profiles>
+        <profile>
+            <id>cleanservice</id>
+            <properties>
+                <artifactory.url>${env.ARTIFACTORY_URL}</artifactory.url>
+                <release.repo>${env.RELEASE_REPO}</release.repo>
+                <snapshot.repo>${env.SNAPSHOT_REPO}</snapshot.repo>
+            </properties>
+        </profile>
+    </profiles>
+    <activeProfiles>
+        <activeProfile>cleanservice</activeProfile>
+    </activeProfiles>
 </settings>
