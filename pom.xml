@@ -31,10 +31,6 @@
 
         <!--  Test Deps  -->
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
-
-        <!--  Artifactory  -->
-        <cleanservice-artifactory-url>${env.ARTIFACTORY_URL}</cleanservice-artifactory-url>
-        <snapshot-repo>${env.SNAPSHOT_REPO}</snapshot-repo>
     </properties>
 
     <dependencyManagement>
@@ -43,19 +39,23 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-configuration-processor</artifactId>
+                <version>3.5.6</version>
                 <optional>true</optional>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
+                <version>3.5.6</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-aop</artifactId>
+                <version>3.5.6</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>3.5.6</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -98,6 +98,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
+                <version>3.5.6</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
@@ -113,10 +114,12 @@
                         <path>
                             <groupId>org.springframework.boot</groupId>
                             <artifactId>spring-boot-configuration-processor</artifactId>
+                            <version>3.5.6</version>
                         </path>
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
@@ -136,10 +139,33 @@
         </plugins>
     </build>
 
-    <distributionManagement>
+    <repositories>
+        <repository>
+            <id>cleanservice-release</id>
+            <url>${artifactory.url}${release.repo}</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
         <repository>
             <id>cleanservice-snapshot</id>
-            <name>cleanservice-snapshot</name>
+            <url>${artifactory.url}${snapshot.repo}</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>cleanservice-release</id>
+            <name>cleanservice-release</name>
             <url>${artifactory.url}${release.repo}</url>
         </repository>
         <snapshotRepository>
